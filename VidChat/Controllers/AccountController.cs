@@ -18,6 +18,7 @@ namespace videoChat.Controllers
         [HttpPost, Route("RegisterUseer")]
         public IHttpActionResult RegisterUser(RegisterUserModel User)
         {
+         
             try
             {
                 using (var ctx = new videoConEntities1())
