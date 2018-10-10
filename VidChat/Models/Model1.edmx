@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="videoConModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CallHistory">
+          <Key>
+            <PropertyRef Name="CallHistoryId" />
+          </Key>
+          <Property Name="CallHistoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CallerId" Type="nvarchar(max)" />
+          <Property Name="ReceiverId" Type="nvarchar(max)" />
+          <Property Name="TimeCallBegan" Type="datetime" />
+          <Property Name="TimeCallEnded" Type="datetime" />
+          <Property Name="CallInfoId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="callInfo">
+          <Key>
+            <PropertyRef Name="CallerId" />
+          </Key>
+          <Property Name="CallInfoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CallerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReceiverId" Type="uniqueidentifier" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="SessionId" Type="nvarchar(max)" />
+          <Property Name="TimeCallPicked" Type="datetime" />
+        </EntityType>
+        <EntityType Name="loggedUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="loggedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="int" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName " Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="LogInTime" Type="datetime" />
+          <Property Name="LogOutTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_callInfo_CallerUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="callInfo" Type="Self.callInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="callInfo">
+              <PropertyRef Name="CallerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_callInfo_ReceiverUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="callInfo" Type="Self.callInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="callInfo">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="videoConModelStoreContainer">
+          <EntitySet Name="CallHistory" EntityType="Self.CallHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="callInfo" EntityType="Self.callInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="loggedUser" EntityType="Self.loggedUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_callInfo_CallerUser" Association="Self.FK_callInfo_CallerUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="callInfo" EntitySet="callInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_callInfo_ReceiverUser" Association="Self.FK_callInfo_ReceiverUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="callInfo" EntitySet="callInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="role" EntitySet="role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="videoConModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="callInfo">
+          <Key>
+            <PropertyRef Name="CallerId" />
+          </Key>
+          <Property Name="CallInfoId" Type="Guid" Nullable="false" />
+          <Property Name="CallerId" Type="Guid" Nullable="false" />
+          <Property Name="ReceiverId" Type="Guid" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCallPicked" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_callInfo_CallerUser" FromRole="callInfo" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_callInfo_ReceiverUser" FromRole="callInfo" ToRole="User" />
+        </EntityType>
+        <EntityType Name="loggedUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Guid" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="loggedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="LogInTime" Type="DateTime" Precision="3" />
+          <Property Name="LogOutTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="callInfo" Relationship="Self.FK_callInfo_CallerUser" FromRole="User" ToRole="callInfo" />
+          <NavigationProperty Name="callInfoes" Relationship="Self.FK_callInfo_ReceiverUser" FromRole="User" ToRole="callInfo" />
+          <NavigationProperty Name="role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="role" />
+        </EntityType>
+        <Association Name="FK_callInfo_CallerUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="callInfo" Type="Self.callInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="callInfo">
+              <PropertyRef Name="CallerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_callInfo_ReceiverUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="callInfo" Type="Self.callInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="callInfo">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="videoConEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="callInfoes" EntityType="Self.callInfo" />
+          <EntitySet Name="loggedUsers" EntityType="Self.loggedUser" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_callInfo_CallerUser" Association="Self.FK_callInfo_CallerUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="callInfo" EntitySet="callInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_callInfo_ReceiverUser" Association="Self.FK_callInfo_ReceiverUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="callInfo" EntitySet="callInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="CallHistories" EntityType="videoConModel.CallHistory" />
+        </EntityContainer>
+        <EntityType Name="CallHistory">
+          <Key>
+            <PropertyRef Name="CallHistoryId" />
+          </Key>
+          <Property Name="CallHistoryId" Type="Guid" Nullable="false" />
+          <Property Name="CallerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCallBegan" Type="DateTime" Precision="3" />
+          <Property Name="TimeCallEnded" Type="DateTime" Precision="3" />
+          <Property Name="CallInfoId" Type="Guid" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="videoConModelStoreContainer" CdmEntityContainer="videoConEntities1">
+          <EntitySetMapping Name="callInfoes">
+            <EntityTypeMapping TypeName="videoConModel.callInfo">
+              <MappingFragment StoreEntitySet="callInfo">
+                <ScalarProperty Name="CallInfoId" ColumnName="CallInfoId" />
+                <ScalarProperty Name="CallerId" ColumnName="CallerId" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="TimeCallPicked" ColumnName="TimeCallPicked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loggedUsers">
+            <EntityTypeMapping TypeName="videoConModel.loggedUser">
+              <MappingFragment StoreEntitySet="loggedUser">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="loggedTime" ColumnName="loggedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="videoConModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="videoConModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastName_" ColumnName="LastName " />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="LogInTime" ColumnName="LogInTime" />
+                <ScalarProperty Name="LogOutTime" ColumnName="LogOutTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallHistories">
+            <EntityTypeMapping TypeName="videoConModel.CallHistory">
+              <MappingFragment StoreEntitySet="CallHistory">
+                <ScalarProperty Name="CallInfoId" ColumnName="CallInfoId" />
+                <ScalarProperty Name="TimeCallEnded" ColumnName="TimeCallEnded" />
+                <ScalarProperty Name="TimeCallBegan" ColumnName="TimeCallBegan" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="CallerId" ColumnName="CallerId" />
+                <ScalarProperty Name="CallHistoryId" ColumnName="CallHistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
