@@ -12,102 +12,102 @@
     <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
     <title>Dashboard</title>
 </head>
-  <body>
-        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">MedVid</a>
-          <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-          <ul class="navbar-nav px-3">
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">MedVid</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-              <a class="nav-link" href="#">Sign out</a>
+                <a class="nav-link" href="#" onclick="return logout();">Sign out</a>
             </li>
-          </ul>
-        </nav>
-        <div id="wrapper">
+        </ul>
+    </nav>
+    <div id="wrapper">
 
         <div class="container-fluid">
-          <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-              <div class="sidebar-sticky">
-                
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a class="nav-link" href="dashboard.html">
-                      Dashboard <span class="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" href="call.html">
-                      Call
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="contacts.html">
-                      Contacts
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      My doctor
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      history
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      Appointments
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">
-                        Prescriptions
-                      </a>
-                    </li>
-                </ul>
-    
-                
-              </div>
-            </nav>
-    
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
 
-                </div>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="dashboard.html">
+                                    Dashboard <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+                                <a class="nav-link active" href="call.html">
+                                    Call
+                                </a>
+                            </li>-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="contacts.html">
+                                    Contacts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    My doctor
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    history
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Appointments
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Prescriptions
+                                </a>
+                            </li>
+                        </ul>
 
-                <div id="page-content-wrapper">
-                    <div class="container-fluid">
-                        <div>
 
-                            <div id="">
+                    </div>
+                </nav>
 
-                                <div id="subscriber"></div>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard</h1>
 
-                                <div id="publisher"></div>
+                    </div>
 
-                                <i class="fas fa-phone fa-3x" style="color: red;position: absolute;bottom: 10px;right: 100px;z-index: 100;border-radius: 3px;"></i>
+                    <div id="page-content-wrapper">
+                        <div class="container-fluid">
+                            <div>
+
+                                <div id="">
+
+                                    <div id="subscriber"></div>
+
+                                    <div id="publisher"></div>
+
+                                    <a href="#"><i class="fas fa-phone fa-3x" style="color: red;position: absolute;bottom: 10px;right: 100px;z-index: 100;border-radius: 3px;"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
             </div>
-          </div>
-          
         </div>
-  
-        <!-- Placed at the end of the document so the pages load faster -->
-        
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-       
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-        <script src="js/functions.js"></script>
-        <script src="js/general.js"></script>
-        <script src="js/call.js"></script>
-     </body>
+
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/general.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script src="js/call.js"></script>
+</body>
 </html>

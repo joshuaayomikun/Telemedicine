@@ -513,11 +513,12 @@ function signedInNavBAr() {
 }
 //fills a multiple select
 function logout() {
-    ajaxcall(apiBaseUrl + "api/Account/Logout/?sessionID=" + window.localStorage.getItem("sessionID"), "", "GET", "json", clearAllLocalStorages);
+	ajaxcall(`${apiBaseUrlapi}/Account/Logout/${USERID}`, "", "GET", "json", clearAllLocalStorages);
+	clearAllLocalStorages();
 }
 function clearAllLocalStorages(obj = "", purpose = "") {
     localStorage.clear();
-    purpose === "" ? location.reload() : "";
+	window.location.href = "login.html";
     spinnerOff();
 }
 //explode a string by any character
