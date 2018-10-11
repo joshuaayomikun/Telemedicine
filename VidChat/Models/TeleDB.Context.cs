@@ -13,10 +13,10 @@ namespace VidChat.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class videoConEntities1 : DbContext
+    public partial class TelemedicineDBEntities : DbContext
     {
-        public videoConEntities1()
-            : base("name=videoConEntities1")
+        public TelemedicineDBEntities()
+            : base("name=TelemedicineDBEntities")
         {
         }
     
@@ -25,10 +25,10 @@ namespace VidChat.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CallHistory> CallHistories { get; set; }
         public virtual DbSet<callInfo> callInfoes { get; set; }
         public virtual DbSet<loggedUser> loggedUsers { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<CallHistory> CallHistories { get; set; }
     }
 }

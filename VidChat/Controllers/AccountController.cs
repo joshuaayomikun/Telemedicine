@@ -21,7 +21,7 @@ namespace videoChat.Controllers
          
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     if (User == null)
                         return Ok("No Request Data");
@@ -53,7 +53,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     if (User == null)
                         return Ok("No Request Data");
@@ -61,6 +61,7 @@ namespace videoChat.Controllers
                     var loginUser = ctx.Users
                         .Where(a => a.Email == User.Email)
                         .FirstOrDefault();
+
                     if(loginUser == null)
                         return Ok("User with this mail "+ User.Email+" those not exit.");
                     var LoggedUser = ctx.loggedUsers.Add(new loggedUser
@@ -87,7 +88,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     if (Id == null)
                         return Ok("No Request Data");

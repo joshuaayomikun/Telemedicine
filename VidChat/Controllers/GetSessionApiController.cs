@@ -23,7 +23,7 @@ namespace videoChat.Controllers
         [Route("InitiateCall"), HttpPost]
         public IHttpActionResult IntiateCall(CallerViewModel data)
         {
-            using (var ctx = new videoConEntities1())
+            using (var ctx = new TelemedicineDBEntities())
             {
                 var caller = ctx.Users
                     .Where(a => a.UserId == data.CallerId)
@@ -32,7 +32,8 @@ namespace videoChat.Controllers
                 {
                     try
                     {
-                        
+                        DateTime serverTime = DateTime.Now;
+                      
                         var session = penTok.CreateSession();
                         var token = session.GenerateToken();
 
@@ -73,7 +74,7 @@ namespace videoChat.Controllers
         [Route("PickCall/{id}"), HttpPost]
         public IHttpActionResult PickCall(Guid id)
         {
-            using (var ctx = new videoConEntities1())
+            using (var ctx = new TelemedicineDBEntities())
             {
                 var PickCall = ctx.callInfoes
                     .Where(a => a.ReceiverId == id)
@@ -129,7 +130,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                 var EndCall = ctx.callInfoes
                     .Where(a => a.ReceiverId == id || a.CallerId == id)
@@ -166,7 +167,7 @@ namespace videoChat.Controllers
         [Route("IsCallPicked/{id}"), HttpPost]
         public IHttpActionResult IsCallPicked(Guid id)
         {
-            using (var ctx = new videoConEntities1())
+            using (var ctx = new TelemedicineDBEntities())
             {
                 var recId = ctx.callInfoes
                     .Where(a => a.ReceiverId == id)
@@ -212,7 +213,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     var recId = ctx.callInfoes
                         .Where(a => a.CallInfoId == id)

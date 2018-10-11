@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\SAMUEL\source\repos\videoChat\VidChat\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\otobogare\source\repos\Telemedicine\VidChat\Models\TeleDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

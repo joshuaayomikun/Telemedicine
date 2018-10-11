@@ -19,7 +19,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     var user = (from u in ctx.Users
                                 where u.UserId == id
@@ -45,7 +45,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     var user = (from u in ctx.loggedUsers
                                 where u.userId == id
@@ -84,7 +84,7 @@ namespace videoChat.Controllers
         {
             try
             {
-                using (var ctx = new videoConEntities1())
+                using (var ctx = new TelemedicineDBEntities())
                 {
                     var CallInfo = (from u in ctx.Users 
                                     where u.UserId != id

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="videoConModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TelemedicineDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CallHistory">
           <Key>
             <PropertyRef Name="CallHistoryId" />
@@ -91,7 +91,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="videoConModelStoreContainer">
+        <EntityContainer Name="TelemedicineDBModelStoreContainer">
           <EntitySet Name="CallHistory" EntityType="Self.CallHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="callInfo" EntityType="Self.callInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="loggedUser" EntityType="Self.loggedUser" Schema="dbo" store:Type="Tables" />
@@ -110,10 +110,22 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="videoConModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TelemedicineDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CallHistory">
+          <Key>
+            <PropertyRef Name="CallHistoryId" />
+          </Key>
+          <Property Name="CallHistoryId" Type="Guid" Nullable="false" />
+          <Property Name="CallerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCallBegan" Type="DateTime" Precision="3" />
+          <Property Name="TimeCallEnded" Type="DateTime" Precision="3" />
+          <Property Name="CallInfoId" Type="Guid" />
+        </EntityType>
         <EntityType Name="callInfo">
           <Key>
             <PropertyRef Name="CallerId" />
@@ -195,7 +207,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="videoConEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TelemedicineDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CallHistories" EntityType="Self.CallHistory" />
           <EntitySet Name="callInfoes" EntityType="Self.callInfo" />
           <EntitySet Name="loggedUsers" EntityType="Self.loggedUser" />
           <EntitySet Name="roles" EntityType="Self.role" />
@@ -212,27 +225,27 @@
             <End Role="role" EntitySet="roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="CallHistories" EntityType="videoConModel.CallHistory" />
         </EntityContainer>
-        <EntityType Name="CallHistory">
-          <Key>
-            <PropertyRef Name="CallHistoryId" />
-          </Key>
-          <Property Name="CallHistoryId" Type="Guid" Nullable="false" />
-          <Property Name="CallerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ReceiverId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TimeCallBegan" Type="DateTime" Precision="3" />
-          <Property Name="TimeCallEnded" Type="DateTime" Precision="3" />
-          <Property Name="CallInfoId" Type="Guid" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="videoConModelStoreContainer" CdmEntityContainer="videoConEntities1">
+        <EntityContainerMapping StorageEntityContainer="TelemedicineDBModelStoreContainer" CdmEntityContainer="TelemedicineDBEntities">
+          <EntitySetMapping Name="CallHistories">
+            <EntityTypeMapping TypeName="TelemedicineDBModel.CallHistory">
+              <MappingFragment StoreEntitySet="CallHistory">
+                <ScalarProperty Name="CallHistoryId" ColumnName="CallHistoryId" />
+                <ScalarProperty Name="CallerId" ColumnName="CallerId" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="TimeCallBegan" ColumnName="TimeCallBegan" />
+                <ScalarProperty Name="TimeCallEnded" ColumnName="TimeCallEnded" />
+                <ScalarProperty Name="CallInfoId" ColumnName="CallInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="callInfoes">
-            <EntityTypeMapping TypeName="videoConModel.callInfo">
+            <EntityTypeMapping TypeName="TelemedicineDBModel.callInfo">
               <MappingFragment StoreEntitySet="callInfo">
                 <ScalarProperty Name="CallInfoId" ColumnName="CallInfoId" />
                 <ScalarProperty Name="CallerId" ColumnName="CallerId" />
@@ -244,7 +257,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="loggedUsers">
-            <EntityTypeMapping TypeName="videoConModel.loggedUser">
+            <EntityTypeMapping TypeName="TelemedicineDBModel.loggedUser">
               <MappingFragment StoreEntitySet="loggedUser">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -253,7 +266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="roles">
-            <EntityTypeMapping TypeName="videoConModel.role">
+            <EntityTypeMapping TypeName="TelemedicineDBModel.role">
               <MappingFragment StoreEntitySet="role">
                 <ScalarProperty Name="roleId" ColumnName="roleId" />
                 <ScalarProperty Name="roleName" ColumnName="roleName" />
@@ -261,7 +274,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="videoConModel.User">
+            <EntityTypeMapping TypeName="TelemedicineDBModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -271,18 +284,6 @@
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="LogInTime" ColumnName="LogInTime" />
                 <ScalarProperty Name="LogOutTime" ColumnName="LogOutTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CallHistories">
-            <EntityTypeMapping TypeName="videoConModel.CallHistory">
-              <MappingFragment StoreEntitySet="CallHistory">
-                <ScalarProperty Name="CallInfoId" ColumnName="CallInfoId" />
-                <ScalarProperty Name="TimeCallEnded" ColumnName="TimeCallEnded" />
-                <ScalarProperty Name="TimeCallBegan" ColumnName="TimeCallBegan" />
-                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
-                <ScalarProperty Name="CallerId" ColumnName="CallerId" />
-                <ScalarProperty Name="CallHistoryId" ColumnName="CallHistoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
