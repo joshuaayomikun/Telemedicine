@@ -97,7 +97,7 @@ function spinnerOff(){
 		idName("loading").style.display = "none";
 }
 function callbackError(obj){
-	alert("An error occurred");
+	console.log(obj + "An error occurred");
 	spinnerOff();
 }
 
@@ -145,7 +145,7 @@ function ajaxcallnew(http, callback, obj, loadingOption, callbackErrors) {
         }
 		else if(http.status === 400 || http.status === 500 || http.status === 404 || http.status === 403){
 			typeof callbackErrors === 'function'? callbackErrors(http.response):callbackError(http.response);
-			loadingOption === "Yes"?spinnerOff():""
+			loadingOption === "Yes" ? spinnerOff() : "";
 		}
     };
 }
