@@ -1,7 +1,7 @@
 ﻿//function to load all contact except the user as an array of users
 //whatever needs to be done with the data needs a function to be sent as a callback
 function getAllContacts(callback, otherData = "", callbackError = "") {
-	ajaxcall(apiBaseUrl + "api/AllUsers/" + USERID, "", "GET", "json", callback, otherData, "No", callbackError);
+	ajaxcall(apiBaseUrl + "api/AllUsers/" + USERID, "", "GET", "json", callback, otherData, "No", callbackError)
 }
 
 //uses data from getAllContacts function and loads them to a card div

@@ -4,22 +4,15 @@ if (USERID !== null) {
 		UserID: USERID,
 		APIBASEURL: apiBaseUrl
 	}
-	worker.postMessage(object)
+	worker.postMessage(object);
 
 	worker.onmessage = function (e) {
-		//debugger;
+		debugger;
 		if (typeof event.data === "object") {
-			obj = JSON.stringify({
-				callerName: e.data.CallerFirstName + " " + e.data.CallerLastName,
-				callMode: 2
-
-			});
-			obj2 = {
-				FirstName: e.data.FirstName,
-				LastName_: e.data.LastName_
-
-			};
-			callModal(obj2, obj);
+			obj = e.data;
+			obj['callMode'] = 2;
+			obj = JSON.stringify(obj);
+			callModal(e.data, obj);
 		}
 
 			//console.log(event.data);

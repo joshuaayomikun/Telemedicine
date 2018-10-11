@@ -3,8 +3,8 @@
 function callModal(receiverObject, otherData) {
 	debugger;
 	var otherData = JSON.parse(otherData);
-	var titleName = (parseInt(otherData.callMode)) === 1 ? otherData.CallerName : receiverObject.FirstName + " " + receiverObject.LastName_;
-	var bodyName = (parseInt(otherData.callMode)) === 2 ? "Incoming call from " + otherData.CallerName : "Calling " + receiverObject.FirstName + " " + receiverObject.LastName_;
+	var titleName = (otherData.callMode * 1) === 1 ? otherData.callerName : receiverObject.FirstName + " " + receiverObject.LastName_;
+	var bodyName = (otherData.callMode * 1) === 2 ? "Incoming call from " + otherData.callerName : "Calling " + receiverObject.FirstName + " " + receiverObject.LastName_;
 	if (idName("callModal") === null)
 		document.body.innerHTML += `<div class="modal fade" id="callModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -17,8 +17,7 @@ function callModal(receiverObject, otherData) {
 					<div id="subscriber"></div>
 					<div id="publisher"></div>
 				</div>-->
-				<a id = "pickCall" href="#" style = "display: flex;justify-content: center;align-items: center;"><img src="img/phone.gif" width="400" height="400" class = "rounded-circle" alt="Calling" title="Calling" /></a> <h5 id="exampleModalBody">${bodyName}</h5>
-				<a href="#" style="display: flex;justify-content: flex-end;"><i class="fas fa-phone fa-3x" style="color:red;"></i></a>
+               <a id = "pickCall" href="#"><img src="img/phone.gif" width="400" height="400" class = "rounded-circle" alt="Calling" title="Calling" /></a> <h5 id="exampleModalBody">${bodyName}</h5>
             </div>
           </div>
         </div>
@@ -65,27 +64,24 @@ function spinnerOn() {
 		{
 			//debugger
 			var elemDiv = document.createElement('div');
-		elemDiv.style.cssText = `    width: 100%;
+			elemDiv.style.cssText = `width: 100%;
 									height: 100%;
-									top: 0px;
-									left: 0px;
+									top: 0;
+									left: 0;
 									position: fixed;
-									flex-direction: column;
-									display: flex;
-									justify-content: center;
-									align-items: center;
+									display: block;
 									opacity: 0.7;
-									background-color: rgb(255, 255, 255);`;
-		elemDiv.id = "loading";
+									background-color: #fff;
+									z-index: 99;
+									text-align: center;`;
+			elemDiv.id = "loading"
 			elemImg = document.createElement('img');
-		elemImg.style.cssText = `    position: absolute;
-									/* top: 100px; */
-									/* z-index: 100; */
-									width: 100px;
-									height: 100px;`;
-			elemImg.src = "img/Spinner.gif";
+			elemImg.style.cssText = `position: absolute;
+									top: 100px;
+									z-index: 100;`
+			elemImg.src = "images/Spinner.gif";
 			elemImg.id = "loading-image";
-		elemDiv.appendChild(elemImg);
+			elemDiv.appendChild(elemImg)
 			document.body.children[0].appendChild(elemDiv);
 		}
 		else
@@ -97,12 +93,12 @@ function spinnerOff(){
 		idName("loading").style.display = "none";
 }
 function callbackError(obj){
-	console.log(obj + "An error occurred");
+	alert("An error occurred");
 	spinnerOff();
 }
 
 function getProfileObject(userId, callback, obj = "", loadingOption = "No", callbackError) {
-	ajaxcall(apiBaseUrl + "api/getUserProfile/" + userId, "", "GET", "json", callback, obj, loadingOption, callbackError);
+	ajaxcall(apiBaseUrl + "api/getUserProfile/" + userId, "", "GET", "json", callback, obj, loadingOption, callbackError)
 }
 
 function ajaxcall(url, params, requestType, responseType, callback, obj = [], loadingOption = "Yes", callbackErrors) {
@@ -145,7 +141,7 @@ function ajaxcallnew(http, callback, obj, loadingOption, callbackErrors) {
         }
 		else if(http.status === 400 || http.status === 500 || http.status === 404 || http.status === 403){
 			typeof callbackErrors === 'function'? callbackErrors(http.response):callbackError(http.response);
-			loadingOption === "Yes" ? spinnerOff() : "";
+			loadingOption === "Yes"?spinnerOff():""
 		}
     };
 }
@@ -529,21 +525,18 @@ function explodeString(stringName, characterSeparator) {
 //Other detail contains caller name and receiver name
 function makeCall(obj, otherDetail) {
 	debugger;
-	otherDetail = explodeString(otherDetail, " ,");
+	otherDetail = explodeString(otherDetail, " ,")
 	receiverDetail = JSON.parse(otherDetail[0]);
 	if (typeof obj === "object") {
-		callMode = 1;
-		otherDetails = [JSON.stringify({ CallerName: FULLNAME, callMode})];
+		otherDetails = [JSON.stringify({ callerName: FULLNAME, callMode: 1 })];
 
 		window.localStorage.setItem("SessionID", obj.SessionId);
 		window.localStorage.setItem("Token", obj.Token);
 		window.localStorage.setItem("CallInfoID", obj.CallInfoId);
 		window.localStorage.setItem("ReceiverID", receiverDetail.ReceiverId);
-		window.history.pushState("", document.title, window.location.pathname);
-		window.location.href !== `${clientBaseUrl}call.html` ? getProfileObject(receiverDetail.ReceiverId, callModal, otherDetails) :"";
-
-		if ((SESSIONID === null && TOKEN === null) || (callMode === 1 && window.location.href !== `${clientBaseUrl}call.html`))
-			window.location.href = "call.html";
+		getProfileObject(receiverDetail.ReceiverId, callModal, otherDetails);
+		if (SESSIONID === null && TOKEN === null)
+		window.location.href = "call.html"
 	}
 	else {
 		alert(obj);

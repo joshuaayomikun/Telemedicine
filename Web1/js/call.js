@@ -1,18 +1,17 @@
-﻿debugger
-if (window.localStorage.getItem("SessionID") === null) {
+﻿if (window.localStorage.getItem("SessionID") === null) {
 	var worker = new Worker('js/pickcallworker.js');
 	if (USERID !== null) {
 		var object = {
 			UserID: USERID,
 			APIBASEURL: apiBaseUrl
-		};
-		worker.postMessage(object);
+		}
+		worker.postMessage(object)
 
 		worker.onmessage = function (e) {
-			//debugger;
+			debugger;
 			if (typeof event.data === "object") {
 				initializeSession(APIKEY, event.data.SessionId, event.data.Token)
-				console.log(event.data);
+				console.log(event.data)
 			}
 			//console.log(event.data);
 		};

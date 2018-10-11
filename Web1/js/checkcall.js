@@ -7,7 +7,7 @@ function ajaxcall(url, params, requestType, responseType, callback, obj = [], lo
 }
 
 function callbackError(obj) {
-	console.log(obj);
+	console.log(obj)
 	//spinnerOff();
 }
 
@@ -42,12 +42,12 @@ function setajax(url, requestType, responseType) {
 //populate an image tag with base64 code
 
 function receiveCall(obj) {
-	debugger;
+	//debugger;
 	var workerResult = "";
 	if (typeof obj === "object") {
 		console.log(obj);
 		console.log('Message received from main script');
-		workerResult = obj;
+		var workerResult = obj;
 		console.log('Posting message back to main script');
 	}
 	else {
@@ -58,8 +58,7 @@ function receiveCall(obj) {
 //debugger;
 var object;
 onmessage = function (e) {
-	debugger
 	object = e;
 	//console.log(e.data);
-	ajaxcall(e.data.APIBASEURL + "api/IsUserAvailable/" + e.data.UserID, "", "GET", "json", receiveCall);
+	ajaxcall(e.data.APIBASEURL + "api/IsUserAvailable/" + e.data.UserID, "", "GET", "json", receiveCall)
 }
