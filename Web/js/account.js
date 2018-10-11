@@ -57,16 +57,17 @@ $(document).ready(function () {
     var LastName = $("#lastname").val();
     var Email = $("#email").val();
     var Password = sha256($("#password").val());
-    var Signup = {
-      FirstName,
-      LastName,
-      Email,
-      Password,
-      //SessionID
-    }
-    ajaxcall(apiBaseUrl + 'Api/RegisterUseer', Signup, 'POST', 'json', signUpProcess)
+	  var Signup = {
+		  FirstName,
+		  LastName,
+		  Email,
+		  Password,
+		  //SessionID
+	  };
+	  ajaxcall(apiBaseUrl + 'Api/RegisterUseer', JSON.stringify(Signup), 'POST', 'json', signUpProcess);
   }
-  function signUpProcess(obj) {
+	function signUpProcess(obj) {
+		debugger;
       try {
           window.localStorage.setItem('UserId', obj.UserId)
       $('#submit').removeAttr('disabled');
