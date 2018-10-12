@@ -30,7 +30,7 @@ body, html {
     border: 3px solid blueviolet;
     border-radius: 3px;
 }
-@media only screen and (min-width:768px){
+/*@media only screen and (min-width:768px){
     #publisher {
         position: absolute;
         width: 360px;
@@ -61,4 +61,4 @@ body, html {
         border-radius: 3px;
         top: 530px;
     }
-}
+}*/

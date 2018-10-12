@@ -27,7 +27,10 @@ function callModal(receiverObject, otherData) {
 		idName("exampleModalLabel").innerHTML = titleName + "Outgoing Call";
 		idName("exampleModalBody").innerHTML = bodyName;
 	}
+	window.localStorage.setItem("CallMode", parseInt(otherData['callMode']));
 	otherData.callMode * 1 === 2 ? idName("pickCall").setAttribute("href", "call.html") : idName("pickCall").setAttribute("href", "#");
+	window.history.pushState("", document.title, window.location.pathname);
+	if (window.location.href !== `${clientBaseUrl}call.html`)
 	$('#callModal').modal('show');
 	initializeSession(APIKEY, SESSIONID, TOKEN);
 }
@@ -490,8 +493,9 @@ function makeCall(obj, otherDetail) {
 		window.localStorage.setItem("CallInfoID", obj.CallInfoId);
 		window.localStorage.setItem("ReceiverID", receiverDetail.ReceiverId);
 		window.history.pushState("", document.title, window.location.pathname);
-		window.location.href !== `${clientBaseUrl}call.html` ? getProfileObject(receiverDetail.ReceiverId, callModal, otherDetails) :"";
 
+		//window.location.href !== `${clientBaseUrl}call.html` ? getProfileObject(receiverDetail.ReceiverId, callModal, otherDetails) :"";
+		window.localStorage.getItem("CallMode") !== 1 ? getProfileObject(receiverDetail.ReceiverId, callModal, otherDetails) : "";
 		if ((SESSIONID === null && TOKEN === null) || (callMode === 1 && window.location.href !== `${clientBaseUrl}call.html`))
 			window.location.href = "call.html";
 	}
