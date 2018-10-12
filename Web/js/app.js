@@ -18,6 +18,7 @@ function initializeSession(apiKey, sessionId, token) {
 	});
 
 	session.on('sessionDisconnected', function sessionDisconnected(event) {
+		window.location.href = "dashboard.html";
 		console.log('You were disconnected from the session.', event.reason);
 	});
 	// Create a publisher
