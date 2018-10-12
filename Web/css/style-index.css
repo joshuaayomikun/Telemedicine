@@ -151,7 +151,7 @@ banner
 	min-height: 650px;
 }
 .banner-info{
-	padding-top: 190px;
+	padding-top: 150px;
 }
 .banner-logo img{
 	display: inline-block;
@@ -168,7 +168,7 @@ banner
 .btn-appoint, .btn-appoint:hover, .btn-appoint:focus{
 	margin-top: 30px;
 	padding: 10px 20px;
-	font-size: 12px;
+	//font-size: 12px;
 	background-color: rgba(12, 184, 182, 0.91);
 	border-radius: 3px;
 	color: #fff;

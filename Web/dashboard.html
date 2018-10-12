@@ -104,7 +104,7 @@
                     <div id="page-content-wrapper">
                         <div class="container-fluid">
                             <h1>Telemedicine</h1>
-                            <<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+                            <!--<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>-->
                         </div>
                     </div>
                 </main>
@@ -117,7 +117,7 @@
     <script src="js/general.js"></script>
     <script src="js/functions.js"></script>
     <script>
-        $("#menu-toggle").click(function (e) {
+        $(document).on('click', '#menu-toggle', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });

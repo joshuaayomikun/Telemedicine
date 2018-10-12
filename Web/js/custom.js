@@ -27,10 +27,11 @@
     } else {
       $(".navbar-fixed-top").removeClass("top-nav-collapse");
     }
-  });
+	});
+	if (window.localStorage.getItem("userID") !== 'undefined')
+		idName("regBtn").setAttribute("href", "dashboard.html");
 
 })(jQuery);
-
 function myFunction() {
   var x = document.getElementById("myDIV");
   if (x.style.display === "none") {
