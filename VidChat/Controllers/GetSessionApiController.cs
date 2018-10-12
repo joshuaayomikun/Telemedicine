@@ -33,7 +33,7 @@ namespace videoChat.Controllers
                     try
                     {
                         DateTime serverTime = DateTime.Now;
-                      
+                        Console.WriteLine(serverTime);
                         var session = penTok.CreateSession();
                         var token = session.GenerateToken();
 
