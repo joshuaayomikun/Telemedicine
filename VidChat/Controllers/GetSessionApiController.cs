@@ -137,8 +137,8 @@ namespace videoChat.Controllers
                     .FirstOrDefault();
                     if (EndCall != null)
                     {
-                        var updateCallHistory = ctx.CallHistories.Where(a => a.CallInfoId == EndCall.CallInfoId).FirstOrDefault();
-                        updateCallHistory.TimeCallEnded = DateTime.Now;
+                        //var updateCallHistory = ctx.CallHistories.Where(a => a.CallInfoId == EndCall.CallInfoId).FirstOrDefault();
+                        //updateCallHistory.TimeCallEnded = DateTime.Now;
 
                         ctx.callInfoes.Remove(EndCall);
 
