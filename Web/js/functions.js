@@ -510,6 +510,13 @@ function endCall(e) {
 	ajaxcall(`${apiBaseUrl}api/EndCall/${USERID}`, `{'id':'${USERID}'}`, "POST", "json", response => {
 		debugger;
 		window.history.pushState("", document.title, window.location.pathname);
+		window.localStorage.removeItem("CallInfoID");
+		window.localStorage.removeItem("CallMode");
+		window.localStorage.removeItem("ReceiverID");
+		window.localStorage.removeItem("SessionID");
+		window.localStorage.removeItem("Token");
+		window.localStorage.removeItem("Token");
+		window.localStorage.removeItem("opentok_client_id");
 		if (window.location.href === `${clientBaseUrl}call.html`)
 			window.location.href = 'dashboard.html';
 		else
