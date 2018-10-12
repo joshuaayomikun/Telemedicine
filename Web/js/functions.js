@@ -505,11 +505,14 @@ function makeCall(obj, otherDetail) {
 }
 
 function endCall(e) {
+	//debugger
 	e.preventDefault();
 	ajaxcall(`${apiBaseUrl}api/EndCall/${USERID}`, `{'id':'${USERID}'}`, "POST", "json", response => {
+		debugger;
 		window.history.pushState("", document.title, window.location.pathname);
 		if (window.location.href === `${clientBaseUrl}call.html`)
 			window.location.href = 'dashboard.html';
+		else
 		window.location.reload();
 	});
 }

@@ -14,9 +14,12 @@ function initializeSession(apiKey, sessionId, token) {
 			width: '100%',
 			height: '100%'
 		}, handleError);
+		session.subscribe(event.stream, 'subscriber', subscriberOptions, handleError);
 	});
 
-
+	session.on('sessionDisconnected', function sessionDisconnected(event) {
+		console.log('You were disconnected from the session.', event.reason);
+	});
 	// Create a publisher
 	var publisher = OT.initPublisher('publisher', {
 		insertMode: 'append',
