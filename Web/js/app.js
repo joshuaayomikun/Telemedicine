@@ -14,7 +14,6 @@ function initializeSession(apiKey, sessionId, token) {
 			width: '100%',
 			height: '100%'
 		}, handleError);
-		session.subscribe(event.stream, 'subscriber', subscriberOptions, handleError);
 	});
 
 	session.on('sessionDisconnected', function sessionDisconnected(event) {
