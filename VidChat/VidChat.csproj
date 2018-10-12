@@ -407,6 +407,9 @@
     <Content Include="obj\Debug\VidChat.csproj.CopyComplete" />
     <Content Include="obj\Debug\VidChat.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\VidChat.csprojAssemblyReference.cache" />
+    <None Include="Properties\PublishProfiles\TelemedicineService - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\TelemedicineService - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TelemedicineWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
