@@ -18,7 +18,7 @@ function callModal(receiverObject, otherData) {
 					<div id="publisher"></div>
 				</div>-->
 				<a id = "pickCall" href="#" style = "display: flex;justify-content: center;align-items: center;"><img src="img/phone.gif" width="400" height="400" class = "rounded-circle" alt="Calling" title="Calling" /></a> <h5 id="exampleModalBody">${bodyName}</h5>
-				<a href="#" style="display: flex;justify-content: flex-end;"><i class="fas fa-phone fa-3x" style="color:red;"></i></a>
+				<a href="#" style="display: flex;justify-content: flex-end;"><i class="fas fa-phone fa-3x" style="color:red;" onclick="endCall(event)"></i></a>
             </div>
           </div>
         </div>
@@ -448,41 +448,6 @@ function sideBar(menuDetails) {
 
                         <ul class="nav flex-column">
 							${links}
-                            <!--<li class="nav-item">
-                                <a class="nav-link" href="dashboard.html">
-                                    Dashboard <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link ${clientBaseUrl + 'call.html' === window.location.href? 'active':''}" href="contacts.html">
-                                    Contacts
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contacts.html">
-                                    Contacts
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    My doctor
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    history
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Appointments
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Prescriptions
-                                </a>
-                            </li>-->
                         </ul>
                     </div>
                 <!--</nav>-->`;
@@ -533,4 +498,14 @@ function makeCall(obj, otherDetail) {
 	else {
 		alert(obj);
 	}
+}
+
+function endCall(e) {
+	e.preventDefault();
+	ajaxcall(`${apiBaseUrl}api/EndCall/${USERID}`, `{'id':'${USERID}'}`, "POST", "json", response => {
+		window.history.pushState("", document.title, window.location.pathname);
+		if (window.location.href === `${clientBaseUrl}call.html`)
+			window.location.href = 'dashboard.html';
+		window.location.reload();
+	});
 }

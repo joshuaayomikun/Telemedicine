@@ -30,3 +30,11 @@ else {
 	makeCall(obj, a);
 	initializeSession(APIKEY, SESSIONID, TOKEN);
 }
+$("#menu-toggle").click(function (e) {
+	e.preventDefault();
+	$("#wrapper").toggleClass("toggled");
+});
+var menuDetails = [{ MenuName: "Dashboard", Href: `${clientBaseUrl}dashboard.html` },
+{ MenuName: "View all Contacts", Href: `${clientBaseUrl}contacts.html` }
+];
+accountButton(menuDetails);

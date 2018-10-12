@@ -74,6 +74,7 @@
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>
+                        <h1>Calling Joshua ...</h1>
 
                     </div>
 
@@ -83,11 +84,12 @@
 
                                 <div id="">
 
-                                    <div id="subscriber"></div>
+                                    <div id="subscriber">
+                                    </div>
 
                                     <div id="publisher"></div>
 
-                                    <a href="#"><i class="fas fa-phone fa-3x" style="color: red;position: absolute;bottom: 10px;right: 100px;z-index: 100;border-radius: 3px;"></i></a>
+                                    <a href="#"><i id="endcall" class="fas fa-phone fa-3x" style="color: red;position: absolute;bottom: 10px;right: 100px;z-index: 100;border-radius: 3px;" onclick="return endCall(event)"></i></a>
                                 </div>
                             </div>
                         </div>

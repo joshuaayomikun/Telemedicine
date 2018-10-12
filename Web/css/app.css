@@ -30,3 +30,35 @@ body, html {
     border: 3px solid blueviolet;
     border-radius: 3px;
 }
+@media only screen and (min-width:768px){
+    #publisher {
+        position: absolute;
+        width: 360px;
+        height: 240px;
+        bottom: 10px;
+        left: 10px;
+        z-index: 100;
+        border: 3px solid blueviolet;
+        border-radius: 3px;
+        top: 350px;
+    }
+    #subscriber {
+        position: absolute;
+        left: 0;
+        top: 150px;
+        width: 100%;
+        height: 320%;
+        z-index: 10;
+        bottom: 0;
+    }
+
+    #endcall {
+        color: red;
+        position: absolute;
+        bottom: 10px;
+        right: 100px;
+        z-index: 100;
+        border-radius: 3px;
+        top: 530px;
+    }
+}
