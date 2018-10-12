@@ -11,7 +11,7 @@ if (window.localStorage.getItem("SessionID") === null) {
 		worker.onmessage = function (e) {
 			//debugger;
 			if (typeof event.data === "object") {
-				initializeSession(APIKEY, event.data.SessionId, event.data.Token)
+				initializeSession(APIKEY, event.data.SessionId, event.data.Token);
 				console.log(event.data);
 			}
 			//console.log(event.data);

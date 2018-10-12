@@ -14,7 +14,7 @@
 </head>
  
     <body>
-        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <!--<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">MedVid</a>
             <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
             <ul class="navbar-nav px-3">
@@ -22,101 +22,100 @@
                     <a class="nav-link" href="#" onclick="logout()">Sign out</a>
                 </li>
             </ul>
-        </nav>
+        </nav>-->
         <div id="wrapper">
 
             <div class="container-fluid">
                 <div class="row">
-                    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                        <div class="sidebar-sticky">
+                    <!--<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
 
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link " href="dashboard.html">
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        My Profile
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="contacts.html">
-                                        Contacts<span class="sr-only">(current)</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        My doctor
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        history
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        Appointments
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        Prescriptions
-                                    </a>
-                                </li>
-                            </ul>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        My Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="contacts.html">
+                        Contacts<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        My doctor
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        history
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Appointments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Prescriptions
+                    </a>
+                </li>
+            </ul>-->
+                    <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#">
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Current month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Last quarter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Social engagement
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Year-end sale
+            </a>
+          </li>
+        </ul> -->
+                <!--</div>
+                </nav>-->
 
-                            <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                          <span>Saved reports</span>
-                          <a class="d-flex align-items-center text-muted" href="#">
-                          </a>
-                        </h6>
-                        <ul class="nav flex-column mb-2">
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Current month
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Last quarter
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Social engagement
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Year-end sale
-                            </a>
-                          </li>
-                        </ul> -->
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Contacts</h1>
+
+                    </div>
+
+                    <div id="page-content-wrapper">
+                        <div class="container-fluid">
+                            <div class="row" id="contacts"></div>
+                            <!--<div class="card" style="width: 10rem;">
+                    <img class="card-img-top" src="img/doctor1.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text"><a href="#" onclick="return createSession('389ea3cd-08df-4ffb-b416-2aa8cc71bd7d', '96e61988-cc5c-47ee-b624-8be391ceed6b')"><i class="fa fa-phone" id="phone"></i></a></i></p>
+                    </div>
+                </div>-->
                         </div>
-                    </nav>
-
-                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">Contacts</h1>
-
-                        </div>
-
-                        <div id="page-content-wrapper">
-                            <div class="container-fluid">
-                                <div class="row" id="contacts"></div>
-                                <!--<div class="card" style="width: 10rem;">
-        <img class="card-img-top" src="img/doctor1.jpg" alt="Card image cap">
-        <div class="card-body">
-            <p class="card-text"><a href="#" onclick="return createSession('389ea3cd-08df-4ffb-b416-2aa8cc71bd7d', '96e61988-cc5c-47ee-b624-8be391ceed6b')"><i class="fa fa-phone" id="phone"></i></a></i></p>
-        </div>
-    </div>-->
-                            </div>
-                        </div>
-                    </main>
-                </div>
+                    </div>
+                </main>
+            </div>
 
             </div>
         </div>

@@ -252,65 +252,12 @@ function validateForm(formId) {
     return value;
 
 }
-//used in the ajaxcall to load the sidebar and navbar and  load them of the present page head,js is loading
-function includeHTMLHead(html) {
-    spinnerOn();
-    //debugger;
-    var idss = document;
-    var head = idss.head.innerHTML
-    //var innerBody = idss.body.children[0].outerHTML;
-    //var allscripts = idss.body.children;
-    var scripts = "";
-	document.head.outerHTML = "";
-	document.body.outerHTML = "";
-	document.body.style.display = "none";
-
-    /*if(allscripts.length > 1);
-    for(var i = 1; i < allscripts.length; i++){
-        if(allscripts[i].src !== clientBaseUrl + "js/head.js" ){
-            if(allscripts[i].src !== clientBaseUrl + "js/functions.js"){
-	        scripts += allscripts[i].outerHTML;
-	        continue;	
-	    }
-        }
-		//console.log(allscripts[i].attributes[0].nodeValue)
-    }*/
-    //innerBody = innerBody.replace("<script src=\"js/head.js\"></script>", "");
-    document.write (`<!doctype html><html><head>${html.head.innerHTML}${head}</head><body style = "display:none;">${html.body.innerHTML}</body></html>`);
-    //console.log(head)
-    //includePresentPage(idss);
-	
-    signedInNavBAr();
-    a = [scripts]
-    ajaxcall(window.location.href, '', 'GET', "document", includeHTMLBody);
+function insertAfter(newNode, referenceNode) {
+	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
-function includeHTMLBody(html, other){
-	//debugger
-    idName("main-body-page").innerHTML = html.body.children[0].outerHTML;
-	var allscripts = html.body.children;
-	if(allscripts.length > 1);
-	for(var i = 1; i < allscripts.length; i++){
-        if(allscripts[i].src !== clientBaseUrl + "js/head.js" ){
-            if(allscripts[i].src !== clientBaseUrl + "js/functions.js"){
-		    a = [allscripts[i].src]
-	        ajaxcall(allscripts[i].src, '', 'GET', "text", loadAllScripts, a);
-	        continue;	
-	    }
-        }
-		//console.log(allscripts[i].attributes[0].nodeValue)
-    }
-    spinnerOff();
-}
-function loadAllScripts(text, a){
-	//debugger
-	var script = document.createElement('script');
-	script.onload = function () {
-    		text
-	};
-	script.src = a;
-	document.head.lastChild.parentNode.insertBefore(script, document.head.lastChild);
-	//document.head.innerHTML += script.outerHTML;
-	document.body.style.display = "block";
+//used to in add before an element on the dom
+function insertBefore(newNode, referenceNode) {
+	referenceNode.parentNode.insertBefore(newNode, referenceNode);
 }
 //useful for get requests to get the params to be sent through ajax 
 function getURLVariable(name, url="") {
@@ -471,50 +418,82 @@ function loopSelectBoxfill(obj, selectBox, keyName, selectedData = "", idNames) 
     spinnerOff();
 }
 //
-function showWelcome() {
-    //debugger;
-    var name = window.localStorage.getItem("userProfile") === "Yes" ? window.localStorage.getItem("firstName") + ` ` + window.localStorage.getItem("lastName") : window.localStorage.getItem("userName");
-	//debugger;
-	idName("account").innerHTML = `<div class="dropdown ">
-                    <a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="images/download (1).png" height="40" />
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a id="createepubfile" href="/create-content.html" class="dropdown-item btn btn-lg  btn-success " role="button"><span>CREATE CONTENT OR SERIES</span><i style="margin-left:10px;" class="fas fa-plus"></i></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-info" href="mylibrary.html" role="button"><i style="margin-right:20px;" class="fas fa-folder"></i>MY LIBRARY</a>
-                        <a class="dropdown-item btn btn-info" href="#" role="button"><i style="margin-right:20px;" class="fas fa-inbox"></i>NOTIFICATION</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-info" href="/UpdateProfile.html" role="button"><i style="margin-right:20px;" class="fas fa-address-card"></i>PROFILE</a>
-                        <a class="dropdown-item btn btn-info" href="#" role="button"><i style="margin-right:20px;" class="fas fa-paw"></i>SALE REPORT</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-info" href="#" role="button"><i style="margin-right:20px;" class="fas fa-cog"></i>SETTING</a>
-                        <a class="dropdown-item btn btn-info" href="#" role="button"><i style="margin-right:20px;" class="fas fa-share-alt"></i>HELP</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-info" href="#" role="button"><i style="margin-right:20px;" class="fas fa-address-book"></i>CONTACT US</a>
-                        <a class="dropdown-item btn btn-info" href="#" role="button" onclick="logout()"><i style="margin-right:20px;" class="fas fa-sign-out-alt"></i>SIGN OUT</a>
-                    </div>
-                </div>`;
+function navBar() {
+	let nav = document.createElement('NAV');
+	nav.className = "navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow";
+	nav.innerHTML = `<!--<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">-->
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">MedVid</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#" onclick="return logout(event);">Sign out</a>
+            </li>
+        </ul>
+    <!--</nav>-->`;
+	return nav;
 }
+function sideBar(menuDetails) {
+	window.history.pushState("", document.title, window.location.pathname);
+	let nav = document.createElement('NAV'),
+		menu = menuDetails.map(value => (`<li class = "nav-item"><a class="nav-link ${value['Href'] === window.location.href ? 'active' : ''}" href="${value['Href']}" ${value['OtherAttributes'] || ""}>${value['MenuName']}  ${value['Href'] === window.location.href ? "<span class='sr-only'>(current)</span>":""} </a></li> `)),
+		links = characterSeparatedArray(menu, " ");
+	nav.className = "col-md-2 d-none d-md-block bg-light sidebar";
+	nav.innerHTML = `<!--<nav class="col-md-2 d-none d-md-block bg-light sidebar">-->
+                    <div class="sidebar-sticky">
 
-function signedInNavBAr() {
-	if (checkLoggedStatus() === true) {
-		idName("header").style.display = "none";
-        showWelcome();
-    }
-	else {
-
-		idName("header").style.display = "block";
-    //    var a = ['l'];
-		//    ajaxcall(apiBaseUrl + 'api/Account/LoggedUser/?userSessionID=' + window.localStorage.getItem('sessionID'), "", "GET", "json", clearAllLocalStorages, a);
-		idName("account").innerHTML = `<a class="navbar-brand" id="account" href="#" onclick = "return login()"><img src="images/download (1).png" height="40" /></a>`;
-    }
-	spinnerOff();
+                        <ul class="nav flex-column">
+							${links}
+                            <!--<li class="nav-item">
+                                <a class="nav-link" href="dashboard.html">
+                                    Dashboard <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${clientBaseUrl + 'call.html' === window.location.href? 'active':''}" href="contacts.html">
+                                    Contacts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contacts.html">
+                                    Contacts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    My doctor
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    history
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Appointments
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Prescriptions
+                                </a>
+                            </li>-->
+                        </ul>
+                    </div>
+                <!--</nav>-->`;
+	return nav;
+}
+function accountButton(menuDetails) {
+	let menu = sideBar(menuDetails);
+	//adds the header(AKA social link) bar just after the page-loader div on the dom.
+	insertBefore(menu, tagName("main")[0]);
+	insertBefore(navBar(), idName("wrapper"));
+	
 }
 //fills a multiple select
-function logout() {
-	ajaxcall(`${apiBaseUrlapi}/Account/Logout/${USERID}`, "", "GET", "json", clearAllLocalStorages);
-	clearAllLocalStorages();
+function logout(e) {
+	e.preventDefault();
+	ajaxcall(`${apiBaseUrl}api/LogOut/${USERID}`, `{"id":"${USERID}"}`, "POST", "json", clearAllLocalStorages);
 }
 function clearAllLocalStorages(obj = "", purpose = "") {
     localStorage.clear();
